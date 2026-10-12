@@ -1,23 +1,5 @@
-/* =========================================
-   CONFIGURACIÓN DEL CONTADOR
-   ========================================= */
-
-/*
-    Fecha objetivo:
-
-    31 de octubre de 2026
-
-    IMPORTANTE:
-    La fecha está configurada para las 00:00:00
-    del 31 de octubre.
-
-    Si posteriormente quieres que se desbloquee
-    exactamente a una determinada hora, solamente
-    tendremos que cambiar esta fecha.
-*/
 
 const targetDate = new Date("2026-10-31T00:00:00");
-
 
 /* =========================================
    ELEMENTOS HTML
@@ -172,3 +154,68 @@ updateCountdown();
 */
 
 setInterval(updateCountdown, 1000);
+
+
+/* =========================================
+   FONDO SEGÚN LA HORA
+   ========================================= */
+
+function updateBackground() {
+    const hour = new Date().getHours();
+
+    const isDay = hour >= 6 && hour < 19;
+
+    document.body.style.backgroundImage = isDay
+        ? 'url("varios/DIA.png")'
+        : 'url("varios/NOCHE.png")';
+}
+
+// Establecer el fondo al abrir la página.
+updateBackground();
+
+// Actualizar cada minuto.
+setInterval(updateBackground, 60 * 1000);
+
+
+/* =========================================
+   MÚSICA DE FONDO EN BUCLE
+   ========================================= */
+
+const music = document.getElementById("backgroundMusic");
+
+if (music) {
+    music.loop = true;
+    music.volume = 1;
+
+    // Intentar reproducir automáticamente.
+    music.play().catch((error) => {
+        console.warn(
+            "No se pudo iniciar automáticamente la música:",
+            error.name,
+            error.message
+        );
+    });
+
+    // Si el navegador bloquea el autoplay,
+    // intentar reproducir al primer toque o clic
+    // en cualquier parte de la página.
+    // No se muestra ningún botón de música.
+    function startMusicAfterInteraction() {
+        if (music.paused) {
+            music.play().catch((error) => {
+                console.warn("Error al reproducir música:", error);
+            });
+        }
+    }
+
+    document.addEventListener(
+        "click",
+        startMusicAfterInteraction
+    );
+
+    document.addEventListener(
+        "touchstart",
+        startMusicAfterInteraction,
+        { passive: true }
+    );
+}

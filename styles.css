@@ -14,12 +14,25 @@ body {
     height: 100%;
 }
 
+
 body {
     background-color: #000;
+    background-image: url("varios/NOCHE.png");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
     color: #fff;
     font-family: Arial, Helvetica, sans-serif;
     overflow: hidden;
 }
+
+.app {
+    position: relative;
+    z-index: 1;
+}
+
 
 
 /* =========================================
@@ -362,4 +375,40 @@ body {
         font-size: 6px;
     }
 
+}
+
+
+/* Botón discreto para activar la música */
+
+.music-button {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 1000;
+
+    padding: 12px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 30px;
+
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+
+    font-size: 13px;
+    letter-spacing: 0.5px;
+
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+.music-button:hover {
+    background: rgba(40, 40, 40, 0.85);
+    transform: translateY(-2px);
+}
+
+.music-button[hidden] {
+    display: none;
 }
