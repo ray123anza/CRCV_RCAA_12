@@ -412,3 +412,197 @@ body {
 .music-button[hidden] {
     display: none;
 }
+
+/* =====================================
+   PANTALLA NEGRA DEL FANTASMA
+===================================== */
+
+.ghost-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #000;
+
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+
+    transition:
+        opacity 0.4s ease,
+        visibility 0.4s ease;
+}
+
+/* Cerrar la pantalla secreta */
+
+.ghost-overlay.ghost-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* IMPORTANTE: hidden siempre debe ocultar el elemento */
+
+#ghostButton[hidden],
+#ghostMessage[hidden] {
+    display: none !important;
+}
+
+/* =====================================
+   BOTÓN DEL FANTASMA
+===================================== */
+
+.ghost-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+    margin: 0;
+
+    border: none;
+    background: transparent;
+
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
+    animation: ghostAppear 0.5s ease both;
+}
+
+/* Imagen */
+
+#ghostImage {
+    display: block;
+
+    width: clamp(130px, 30vw, 230px);
+    max-width: 65vw;
+    max-height: 55vh;
+
+    object-fit: contain;
+
+    filter: drop-shadow(
+        0 0 16px rgba(255, 255, 255, 0.18)
+    );
+
+    animation: ghostFloat 1.6s ease-in-out infinite;
+}
+
+/* Efecto al pasar el cursor */
+
+.ghost-button:hover #ghostImage {
+    filter: drop-shadow(
+        0 0 24px rgba(177, 161, 237, 0.7)
+    );
+}
+
+/* Efecto al presionar */
+
+.ghost-button:active #ghostImage {
+    transform: scale(0.92);
+}
+
+/* =====================================
+   MENSAJE SECRETO MORADO
+===================================== */
+
+.ghost-message {
+    box-sizing: border-box;
+
+    width: min(78vw, 280px);
+    aspect-ratio: 1 / 1;
+
+    padding: 24px;
+
+    background: #b1a1ed;
+    color: #29203d;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+
+    text-align: center;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 0 30px rgba(177, 161, 237, 0.25);
+
+    animation: messageAppear 0.35s ease both;
+}
+
+.ghost-message p {
+    margin: 0;
+
+    font-size: clamp(17px, 4vw, 22px);
+    line-height: 1.4;
+}
+
+.ghost-message p:first-child {
+    font-weight: 700;
+}
+
+.ghost-message p:last-child {
+    font-size: clamp(15px, 3.5vw, 18px);
+}
+
+/* =====================================
+   ANIMACIONES
+===================================== */
+
+@keyframes ghostAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.75);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes ghostFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes messageAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Reducir animaciones si el dispositivo lo solicita */
+
+@media (prefers-reduced-motion: reduce) {
+    .ghost-button,
+    #ghostImage,
+    .ghost-message {
+        animation: none;
+    }
+
+    .ghost-overlay {
+        transition: none;
+    }
+}

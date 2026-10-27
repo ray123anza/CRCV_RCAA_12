@@ -219,3 +219,82 @@ if (music) {
         { passive: true }
     );
 }
+
+/* =====================================
+   SECUENCIA SECRETA DEL FANTASMA
+===================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const overlay = document.getElementById("ghostOverlay");
+    const ghostButton = document.getElementById("ghostButton");
+    const message = document.getElementById("ghostMessage");
+
+    // Si faltan elementos, no ejecutar la secuencia.
+    if (!overlay || !ghostButton || !message) {
+        return;
+    }
+
+    let clicked = false;
+    let finished = false;
+    let ghostTimer;
+    let messageTimer;
+    let blackTimer;
+
+    // Estado inicial: solo se ve el fantasma.
+    overlay.classList.remove("ghost-hidden");
+    ghostButton.hidden = false;
+    message.hidden = true;
+
+    // El fantasma solo permanece 3 segundos.
+    ghostTimer = setTimeout(() => {
+
+        if (clicked || finished) {
+            return;
+        }
+
+        finished = true;
+
+        // Desaparece la pantalla negra y aparece la página.
+        overlay.classList.add("ghost-hidden");
+
+    }, 3000);
+
+    // El mensaje solo aparece al pulsar el fantasma.
+    ghostButton.addEventListener("click", () => {
+
+        // Evitar clics repetidos o clics fuera de tiempo.
+        if (clicked || finished) {
+            return;
+        }
+
+        clicked = true;
+
+        // Detener el tiempo de espera del fantasma.
+        clearTimeout(ghostTimer);
+
+        // Ocultar el botón y mostrar el mensaje.
+        ghostButton.hidden = true;
+        message.hidden = false;
+
+        // El mensaje permanece visible durante 3 segundos.
+        messageTimer = setTimeout(() => {
+
+            // Ocultar el mensaje: queda la pantalla negra.
+            message.hidden = true;
+
+            // Mantener el fondo negro durante medio segundo.
+            blackTimer = setTimeout(() => {
+
+                finished = true;
+
+                // Revelar la página normal.
+                overlay.classList.add("ghost-hidden");
+
+            }, 500);
+
+        }, 3000);
+
+    });
+
+});
