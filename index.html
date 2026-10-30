@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
 
     <title>CRCV_RCAA</title>
 
@@ -12,6 +13,7 @@
 
 <body>
 
+    <!-- MÚSICA DE FONDO ORIGINAL -->
     <audio id="backgroundMusic" autoplay loop preload="auto">
         <source src="varios/cancion1.mp3" type="audio/mpeg">
     </audio>
@@ -19,12 +21,12 @@
     <main class="app">
 
         <!-- =========================================
-             ETAPA 1: CONTADOR
-             ========================================= -->
+             ETAPA 1: CONTADOR PRINCIPAL
+        ========================================== -->
+
         <section id="countdownScreen" class="screen active">
 
             <div class="countdown-container">
-
 
                 <div class="countdown">
 
@@ -62,69 +64,369 @@
 
 
         <!-- =========================================
-             FUTURAS ETAPAS
-             
-             Por ahora permanecen ocultas.
-             
-             Más adelante podremos añadir:
-             
-             1. Código
-             2. Audio
-             3. Video
-             
-             ========================================= -->
+             ETAPA 2: CONTRASEÑA DEL ANIVERSARIO
+        ========================================== -->
 
-        <!--
-        <section id="codeScreen" class="screen">
-            Aquí irá el código...
+        <section id="passwordScreen" class="screen" hidden>
+
+            <div class="password-container">
+
+                <h1>31 de Octubre de 2026</h1>
+
+                <p>
+                    Introduce la contraseña para continuar
+                </p>
+
+                <input
+                    type="password"
+                    id="anniversaryPassword"
+                    placeholder="Contraseña"
+                    autocomplete="off"
+                >
+
+                <button type="button" id="passwordButton">
+                    INGRESAR
+                </button>
+
+                <p id="passwordError" hidden>
+                    Contraseña incorrecta. Inténtalo nuevamente.
+                </p>
+
+            </div>
+
         </section>
 
-        <section id="audioScreen" class="screen">
-            Aquí irá el audio...
+
+        <!-- =========================================
+             ETAPA 3: AUDIO-LIBRO Y MENÚ
+        ========================================== -->
+
+        <section id="audioScreen" class="screen" hidden>
+
+            <!-- BOTÓN MENÚ -->
+            <button
+                type="button"
+                id="menuButton"
+                class="menu-button"
+                aria-label="Abrir menú"
+                aria-expanded="false"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <!-- MENÚ DESPLEGABLE -->
+            <nav id="dropdownMenu" class="dropdown-menu" hidden>
+
+                <a href="https://ray123anza.github.io/INVITACION_CRCV_HALLOWEN-MAYO/"
+                   target="_blank" rel="noopener noreferrer">
+                    CUADRO DE LOS GATOS
+                </a>
+
+                <a href="https://ray123anza.github.io/ADIVINANZA_CRCV/"
+                   target="_blank" rel="noopener noreferrer">
+                    ADIVINANZA DEL COLIBRÍ
+                </a>
+
+                <a href="https://ca-crdns.github.io/Feliz-Cumplea-os/"
+                   target="_blank" rel="noopener noreferrer">
+                    CUMPLEAÑOS RAY
+                </a>
+
+                <a href="https://ca-crdns.github.io/Paloma-Mensajera/"
+                   target="_blank" rel="noopener noreferrer">
+                    PALOMA MENSAJERA
+                </a>
+
+                <button type="button" id="openAnnualCounter">
+                    EL CONTADOR
+                </button>
+
+                <button type="button" id="openMystery">
+                    ???
+                </button>
+
+            </nav>
+
+
+            <!-- REPRODUCTOR DEL AUDIO-LIBRO -->
+
+            <div class="audio-container">
+
+                <h1 class="audio-title">AUDIO-LIBRO</h1>
+
+                <img
+                    src="varios/portada.png"
+                    alt="Portada del audiolibro"
+                    class="audio-cover"
+                >
+
+                <div class="custom-player">
+
+                    <audio id="audiobook" preload="metadata">
+                        <source src="varios/audiolibro.mp3" type="audio/mpeg">
+                        Tu navegador no puede reproducir este audio.
+                    </audio>
+
+                    <div class="progress-container">
+
+                        <input
+                            type="range"
+                            id="audioProgress"
+                            min="0"
+                            max="100"
+                            value="0"
+                            step="0.1"
+                            aria-label="Progreso del audiolibro"
+                        >
+
+                        <div class="audio-times">
+                            <span id="currentTime">0:00</span>
+                            <span id="duration">0:00</span>
+                        </div>
+
+                    </div>
+
+                    <div class="audio-controls">
+
+                        <button
+                            type="button"
+                            id="backwardButton"
+                            aria-label="Retroceder 15 segundos"
+                        >
+                            -15
+                        </button>
+
+                        <button
+                            type="button"
+                            id="playButton"
+                            class="play-button"
+                            aria-label="Reproducir"
+                        >
+                            ▶
+                        </button>
+
+                        <button
+                            type="button"
+                            id="forwardButton"
+                            aria-label="Avanzar 15 segundos"
+                        >
+                            +15
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </section>
 
-        <section id="videoScreen" class="screen">
-            Aquí irá el video...
+
+        <!-- =========================================
+             ETAPA 4: CONTADOR ANUAL
+        ========================================== -->
+
+        <section id="annualCounterScreen" class="screen" hidden>
+
+            <button
+                type="button"
+                id="backFromCounter"
+                class="back-button"
+                aria-label="Volver al audiolibro"
+            >
+                ←
+            </button>
+
+            <div class="annual-counter-container">
+
+
+                <div class="countdown annual-countdown">
+
+                    <div class="time-box">
+                        <span id="annualDays" class="number">00</span>
+                        <span class="label">DÍAS</span>
+                    </div>
+
+                    <span class="separator">:</span>
+
+                    <div class="time-box">
+                        <span id="annualHours" class="number">00</span>
+                        <span class="label">HORAS</span>
+                    </div>
+
+                    <span class="separator">:</span>
+
+                    <div class="time-box">
+                        <span id="annualMinutes" class="number">00</span>
+                        <span class="label">MINUTOS</span>
+                    </div>
+
+                    <span class="separator">:</span>
+
+                    <div class="time-box">
+                        <span id="annualSeconds" class="number">00</span>
+                        <span class="label">SEGUNDOS</span>
+                    </div>
+
+                </div>
+
+                <button
+                    type="button"
+                    id="annualMusicButton"
+                    class="annual-music-button"
+                >
+                    ▶ REPRODUCIR
+                </button>
+
+                <audio id="annualMusic" preload="auto">
+                    <source src="varios/cancion1.mp3" type="audio/mpeg">
+                </audio>
+
+            </div>
+
         </section>
-        -->
+
+
+        <!-- =========================================
+             ETAPA 5: CONTRASEÑA DEL MISTERIO
+        ========================================== -->
+
+        <section id="mysteryPasswordScreen" class="screen" hidden>
+    <button id="backFromMystery" class="back-button" type="button">
+        ←
+    </button>
+
+    <div class="mystery-container">
+
+        <div class="mystery-clue">
+
+            <div class="mystery-line">
+                <div class="mystery-word">
+                    <input class="mystery-letter" maxlength="1" aria-label="Letra 1">
+                </div>
+
+                <span class="mystery-separator">-</span>
+
+                <div class="mystery-word">
+                    <input class="mystery-letter" maxlength="1" aria-label="Letra 2">
+                    <input class="mystery-letter" maxlength="1" aria-label="Letra 3">
+                    <input class="mystery-letter" maxlength="1" aria-label="Letra 4">
+                    <input class="mystery-letter" maxlength="1" aria-label="Letra 5">
+                </div>
+            </div>
+
+            <div class="mystery-line">
+                <div class="mystery-word">
+                    <input class="mystery-letter" maxlength="1" aria-label="Letra 6">
+                    <input class="mystery-letter" maxlength="1" aria-label="Letra 7">
+                    <input class="mystery-letter" maxlength="1" aria-label="Letra 8">
+                    <input class="mystery-letter" maxlength="1" aria-label="Letra 9">
+                </div>
+            </div>
+
+            <div class="mystery-line">
+                <div class="mystery-word">
+                    <input class="mystery-letter" maxlength="1" aria-label="Letra 10">
+                    <input class="mystery-letter" maxlength="1" aria-label="Letra 11">
+                    <input class="mystery-letter" maxlength="1" aria-label="Letra 12">
+                    <input class="mystery-letter" maxlength="1" aria-label="Letra 13">
+                    <input class="mystery-letter" maxlength="1" aria-label="Letra 14">
+                    <input class="mystery-letter" maxlength="1" aria-label="Letra 15">
+                    <input class="mystery-letter" maxlength="1" aria-label="Letra 16">
+                </div>
+            </div>
+
+            <div class="mystery-line">
+                <div class="mystery-word">
+                    <input class="mystery-letter" maxlength="1" aria-label="Letra 17">
+                    <input class="mystery-letter" maxlength="1" aria-label="Letra 18">
+                    <input class="mystery-letter" maxlength="1" aria-label="Letra 19">
+                </div>
+
+                <span class="mystery-separator">-</span>
+
+                <div class="mystery-word">
+                    <input class="mystery-letter" maxlength="1" aria-label="Letra 20">
+                </div>
+            </div>
+
+        </div>
+
+        <button id="mysteryPasswordButton" type="button">
+            CONFIRMAR
+        </button>
+
+        <p id="mysteryPasswordError" hidden>
+            CONTRASEÑA INCORRECTA
+        </p>
+
+    </div>
+    </section>
+
+        <!-- =========================================
+             ETAPA 6: VIDEO MISTERIOSO
+        ========================================== -->
+
+        <section id="videoScreen" class="screen" hidden>
+
+            <button
+                type="button"
+                id="closeVideoButton"
+                class="back-button"
+                aria-label="Cerrar video"
+            >
+                ✕
+            </button>
+
+            <div class="video-container">
+
+                <iframe
+                    id="mysteryVideo"
+                    src="https://drive.google.com/file/d/1HMwYlnoURCyH6b769KOUJwbIyFEW9L_E/preview"
+                    allow="autoplay; fullscreen"
+                    allowfullscreen
+                    title="Video misterioso"
+                ></iframe>
+
+            </div>
+
+        </section>
 
     </main>
 
+
+    <!-- =========================================
+         BOTÓN SECRETO DEL FANTASMA
+    ========================================== -->
+
+    <div id="ghostOverlay" class="ghost-overlay">
+
+        <button
+            id="ghostButton"
+            class="ghost-button"
+            type="button"
+            aria-label="Descubrir mensaje secreto"
+        >
+            <img
+                src="varios/fantasma.png"
+                alt="Fantasma"
+                id="ghostImage"
+            >
+        </button>
+
+        <div id="ghostMessage" class="ghost-message" hidden>
+            <p>Revisa el casillero</p>
+            <p>Atte. El señor</p>
+        </div>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+
     <script src="script.js"></script>
 
-    </div>
-
-    <!-- =====================================
-     BOTÓN SECRETO DEL FANTASMA
-===================================== -->
-
-<div id="ghostOverlay" class="ghost-overlay">
-
-    <!-- Fantasma: botón secreto -->
-    <button
-        id="ghostButton"
-        class="ghost-button"
-        type="button"
-        aria-label="Descubrir mensaje secreto"
-    >
-        <img
-            src="varios/fantasma.png"
-            alt="Fantasma"
-            id="ghostImage"
-        >
-    </button>
-
-    <!-- Mensaje secreto: oculto al iniciar -->
-    <div id="ghostMessage" class="ghost-message" hidden>
-        <p>Revisa el casillero</p>
-        <p>Atte. El señor</p>
-    </div>
-
-</div>
-
-<script src="script.js"></script>
 </body>
-
-</body>
-
 </html>

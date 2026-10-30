@@ -606,3 +606,908 @@ body {
         transition: none;
     }
 }
+
+/* =====================================
+   PANTALLA DE CONTRASEÑA
+===================================== */
+
+.password-container {
+    width: 90%;
+    max-width: 380px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    animation: fadeIn 1s ease;
+}
+
+.password-container h1 {
+    font-size: clamp(22px, 5vw, 32px);
+    font-weight: 400;
+    letter-spacing: 1px;
+
+    margin-bottom: 15px;
+}
+
+.password-container p {
+    color: #aaa;
+    font-size: clamp(12px, 3vw, 15px);
+
+    margin-bottom: 25px;
+}
+
+#anniversaryPassword {
+    width: 100%;
+    height: 48px;
+
+    padding: 0 15px;
+
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 8px;
+
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 2px;
+
+    outline: none;
+
+    margin-bottom: 15px;
+}
+
+#anniversaryPassword:focus {
+    border-color: #b1a1ed;
+}
+
+#anniversaryPassword::placeholder {
+    color: #777;
+    letter-spacing: 1px;
+}
+
+#passwordButton {
+    width: 100%;
+    height: 48px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #b1a1ed;
+    color: #29203d;
+
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+#passwordButton:hover {
+    transform: translateY(-2px);
+}
+
+#passwordButton:active {
+    transform: scale(0.97);
+}
+
+#passwordError {
+    color: #ff7777;
+    font-size: 13px;
+
+    margin-top: 18px;
+    margin-bottom: 0;
+}
+
+/* Los elementos con hidden deben permanecer ocultos */
+[hidden] {
+    display: none !important;
+}
+
+
+/* =========================================
+   ETAPA 3: AUDIO-LIBRO
+========================================= */
+
+#audioScreen {
+    overflow-y: auto;
+    padding: 25px 0;
+    -webkit-overflow-scrolling: touch;
+}
+
+.audio-container {
+    width: 90%;
+    max-width: 420px;
+    min-height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 25px 0;
+    margin: auto;
+
+    animation: fadeIn 1s ease;
+}
+
+/* TÍTULO */
+
+.audio-title {
+    font-size: clamp(25px, 6vw, 34px);
+    font-weight: 500;
+    letter-spacing: 3px;
+
+    margin-bottom: 30px;
+}
+
+/* PORTADA */
+
+.audio-cover {
+    display: block;
+
+    width: 75%;
+    max-width: 280px;
+    height: auto;
+
+    object-fit: contain;
+
+    border-radius: 8px;
+
+    margin-bottom: 35px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* REPRODUCTOR */
+
+.custom-player {
+    width: 100%;
+    max-width: 380px;
+
+    padding: 22px 20px;
+
+    background: rgba(20, 20, 20, 0.85);
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+/* BARRA DE PROGRESO */
+
+.progress-container {
+    width: 100%;
+    margin-bottom: 22px;
+}
+
+#audioProgress {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 100%;
+    height: 5px;
+
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+
+    outline: none;
+    cursor: pointer;
+}
+
+/* Barra para navegadores WebKit */
+
+#audioProgress::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 13px;
+    height: 13px;
+
+    background: #fff;
+    border-radius: 50%;
+
+    cursor: pointer;
+}
+
+/* Barra para Firefox */
+
+#audioProgress::-moz-range-thumb {
+    width: 13px;
+    height: 13px;
+
+    background: #fff;
+    border: none;
+    border-radius: 50%;
+
+    cursor: pointer;
+}
+
+/* TIEMPOS */
+
+.audio-times {
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 10px;
+
+    color: #aaa;
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+}
+
+/* CONTROLES */
+
+.audio-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 30px;
+}
+
+/* BOTONES LATERALES */
+
+.audio-controls button {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 50%;
+
+    background: transparent;
+    color: #ddd;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.audio-controls button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.audio-controls button:active {
+    transform: scale(0.9);
+}
+
+/* BOTÓN PRINCIPAL */
+
+.audio-controls .play-button {
+    width: 58px;
+    height: 58px;
+
+    background: #fff;
+    color: #111;
+
+    font-size: 23px;
+
+    padding-left: 4px;
+}
+
+.audio-controls .play-button:hover {
+    background: #ddd;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 600px) {
+
+    .audio-container {
+        width: 88%;
+    }
+
+    .audio-title {
+        margin-bottom: 25px;
+    }
+
+    .audio-cover {
+        width: 75%;
+        max-width: 250px;
+        margin-bottom: 30px;
+    }
+
+    .custom-player {
+        padding: 20px 16px;
+    }
+
+    .audio-controls {
+        gap: 25px;
+    }
+
+}
+
+
+/* =========================================
+   NUEVO MENÚ DESPLEGABLE
+========================================= */
+
+/* Botón de tres líneas */
+
+.menu-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+
+    padding: 8px;
+
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+
+    transition: background 0.25s ease;
+}
+
+.menu-button:hover {
+    background: rgba(50, 50, 50, 0.9);
+}
+
+.menu-button span {
+    display: block;
+
+    width: 22px;
+    height: 2px;
+
+    background: #fff;
+    border-radius: 3px;
+
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+/* Animación del botón cuando está abierto */
+
+.menu-button.menu-open span:first-child {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.menu-button.menu-open span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-button.menu-open span:last-child {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+
+/* =========================================
+   CONTENIDO DEL MENÚ
+========================================= */
+
+.dropdown-menu {
+    position: fixed;
+    top: 75px;
+    left: 20px;
+
+    z-index: 1001;
+
+    width: min(280px, calc(100vw - 40px));
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 8px;
+
+    background: rgba(15, 15, 15, 0.96);
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+
+    backdrop-filter: blur(12px);
+
+    animation: menuAppear 0.2s ease;
+}
+
+.dropdown-menu a,
+.dropdown-menu button {
+    display: block;
+
+    width: 100%;
+
+    padding: 15px 12px;
+
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+
+    color: #eee;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+
+    text-align: left;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #b1a1ed;
+}
+
+@keyframes menuAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================
+   ETAPA 4: CONTADOR ANUAL
+========================================= */
+
+#annualCounterScreen {
+    overflow-y: auto;
+    padding: 30px 0;
+    -webkit-overflow-scrolling: touch;
+}
+
+.annual-counter-container {
+    width: 95%;
+    max-width: 1000px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    gap: 45px;
+
+    margin: auto;
+    padding: 30px 0;
+
+    animation: fadeIn 1s ease;
+}
+
+.annual-counter-container h1 {
+    font-size: clamp(24px, 5vw, 36px);
+    font-weight: 400;
+    letter-spacing: 4px;
+}
+
+.annual-countdown {
+    width: 100%;
+}
+
+/* Botón de música */
+
+.annual-music-button {
+    min-width: 210px;
+    min-height: 48px;
+
+    padding: 12px 22px;
+
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 30px;
+
+    color: #fff;
+
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+.annual-music-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.annual-music-button:active {
+    transform: scale(0.96);
+}
+
+
+/* =========================================
+   BOTÓN PARA VOLVER
+========================================= */
+
+.back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+
+    z-index: 1002;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+
+    color: #fff;
+    font-size: 22px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.back-button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
+}
+
+
+
+/* =========================================
+   ETAPA 5: CONTRASEÑA DEL MISTERIO
+========================================= */
+
+#mysteryPasswordScreen {
+    overflow-y: auto;
+    padding: 75px 15px 25px;
+}
+
+.mystery-container {
+    width: 100%;
+    max-width: 520px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    animation: fadeIn 1s ease;
+}
+
+/* CONTENEDOR DE LAS CUATRO LÍNEAS */
+
+.mystery-clue {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 22px;
+
+    margin-bottom: 35px;
+}
+
+/* CADA LÍNEA */
+
+.mystery-line {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+}
+
+/* GRUPOS DE LETRAS */
+
+.mystery-word {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+}
+
+/* CASILLAS INDIVIDUALES */
+
+.mystery-letter {
+    width: clamp(30px, 7vw, 42px);
+    height: clamp(38px, 9vw, 50px);
+
+    padding: 0;
+
+    background: rgba(15, 15, 15, 0.85);
+
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 6px;
+
+    color: #fff;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(16px, 4vw, 21px);
+    font-weight: 600;
+
+    text-align: center;
+    text-transform: uppercase;
+
+    outline: none;
+    caret-color: #b1a1ed;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* CASILLA ACTIVA */
+
+.mystery-letter:focus {
+    border-color: #b1a1ed;
+
+    background: rgba(177, 161, 237, 0.12);
+
+    box-shadow: 0 0 10px rgba(177, 161, 237, 0.25);
+}
+
+/* GUIONES VISUALES */
+
+.mystery-separator {
+    color: #aaa;
+
+    font-size: 22px;
+    font-weight: 300;
+
+    margin: 0 2px;
+}
+
+/* BOTÓN CONFIRMAR */
+
+#mysteryPasswordButton {
+    width: 100%;
+    max-width: 320px;
+
+    height: 48px;
+
+    background: #b1a1ed;
+    border: none;
+    border-radius: 8px;
+
+    color: #29203d;
+
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+#mysteryPasswordButton:hover {
+    transform: translateY(-2px);
+}
+
+#mysteryPasswordButton:active {
+    transform: scale(0.97);
+}
+
+/* MENSAJE DE ERROR */
+
+#mysteryPasswordError {
+    margin-top: 18px;
+
+    color: #ff7777;
+
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 600px) {
+
+    .mystery-container {
+        max-width: 100%;
+    }
+
+    .mystery-clue {
+        gap: 20px;
+    }
+
+    .mystery-line {
+        gap: 8px;
+    }
+
+    .mystery-word {
+        gap: 4px;
+    }
+
+    .mystery-letter {
+        width: clamp(25px, 7.5vw, 36px);
+        height: 42px;
+
+        font-size: 17px;
+        border-radius: 5px;
+    }
+
+    .mystery-separator {
+        font-size: 18px;
+    }
+
+    #mysteryPasswordButton {
+        max-width: 280px;
+    }
+
+}
+
+/* CELULARES MUY PEQUEÑOS */
+
+@media (max-width: 360px) {
+
+    .mystery-line {
+        gap: 5px;
+    }
+
+    .mystery-word {
+        gap: 3px;
+    }
+
+    .mystery-letter {
+        width: 24px;
+        height: 36px;
+
+        font-size: 15px;
+    }
+
+}
+
+/* =========================================
+   ETAPA 6: VIDEO MISTERIOSO
+========================================= */
+
+#videoScreen {
+    background: #000;
+    overflow: hidden;
+}
+
+.video-container {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #000;
+}
+
+.video-container iframe {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    border: none;
+    background: #000;
+}
+
+/* Botón para cerrar el video */
+
+#closeVideoButton {
+    background: rgba(0, 0, 0, 0.7);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+
+/* =========================================
+   RESPONSIVE: NUEVAS SECCIONES
+========================================= */
+
+@media (max-width: 600px) {
+
+    .menu-button {
+        top: 15px;
+        left: 15px;
+    }
+
+    .dropdown-menu {
+        top: 68px;
+        left: 15px;
+
+        width: min(280px, calc(100vw - 30px));
+    }
+
+    .annual-counter-container {
+        gap: 35px;
+    }
+
+    .annual-counter-container h1 {
+        letter-spacing: 3px;
+    }
+
+    .annual-countdown {
+        gap: 4px;
+    }
+
+    .annual-countdown .time-box {
+        min-width: 55px;
+    }
+
+    .annual-countdown .number {
+        font-size: clamp(28px, 10vw, 55px);
+        letter-spacing: 0;
+    }
+
+    .annual-countdown .label {
+        font-size: 7px;
+        letter-spacing: 1.5px;
+        margin-top: 10px;
+    }
+
+    .annual-countdown .separator {
+        font-size: 25px;
+        margin-bottom: 18px;
+    }
+
+    .back-button {
+        top: 15px;
+        left: 15px;
+    }
+
+}
+
+/* =========================================
+   VISIBILIDAD DEL MENÚ DESPLEGABLE
+========================================= */
+
+.dropdown-menu {
+    display: none;
+}
+
+.dropdown-menu.menu-open {
+    display: flex;
+}
