@@ -8,8 +8,10 @@ const targetDate = new Date("2026-10-31T00:00:00");;
 const MYSTERY_PASSWORD = "BOCHODIEZTREINTAUNOD";
 
 const MYSTERY_VIDEO_URL =
-    "https://drive.google.com/file/d/1HMwYlnoURCyH6b769KOUJwbIyFEW9L_E/preview";
+    "https://drive.google.com/file/d/1a6QlDakqpG0-R5BAPj594H50C30DdvVk/preview";
 
+const MYSTERY_VIDEO_URL_2 =
+    "https://drive.google.com/file/d/1N3PIzx9ZGphxx-Ji8Gs-RFfldkchyDCL/preview";
 
 /* =========================================
    ELEMENTOS HTML
@@ -933,63 +935,107 @@ document.addEventListener("DOMContentLoaded", () => {
    ABRIR VIDEO MISTERIOSO
 ========================================= */
 
-function openMysteryVideo() {
 
+function openMysteryVideo() {
     const mysteryVideo = document.getElementById("mysteryVideo");
+    const playPart1Button = document.getElementById("playPart1Button");
+    const playPart2Button = document.getElementById("playPart2Button");
+    const finishPart1Button = document.getElementById("finishPart1Button");
 
     if (mysteryVideo) {
+        mysteryVideo.src = "";
+    }
 
-        mysteryVideo.src = MYSTERY_VIDEO_URL;
+    if (playPart1Button) {
+        playPart1Button.hidden = false;
+    }
 
+    if (playPart2Button) {
+        playPart2Button.hidden = true;
+    }
+
+    if (finishPart1Button) {
+        finishPart1Button.hidden = true;
     }
 
     showScreen(videoScreen);
-
-    const videoContainer = document.querySelector(".video-container");
-
-    if (videoContainer && videoContainer.requestFullscreen) {
-
-        videoContainer.requestFullscreen().catch(error => {
-
-            console.warn("No se pudo activar pantalla completa:", error);
-
-        });
-
-    }
-
 }
 
-
 /* =========================================
-   CERRAR VIDEO Y VOLVER AL AUDIO-LIBRO
+   REPRODUCCIÓN DE LAS DOS PARTES
 ========================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    const mysteryVideo = document.getElementById("mysteryVideo");
+
+    const playPart1Button = document.getElementById("playPart1Button");
+    const finishPart1Button = document.getElementById("finishPart1Button");
+    const playPart2Button = document.getElementById("playPart2Button");
+
     const closeVideoButton = document.getElementById("closeVideoButton");
 
-    if (!closeVideoButton) return;
+    // REPRODUCIR PARTE 1
+    if (playPart1Button) {
+        playPart1Button.addEventListener("click", () => {
 
-    closeVideoButton.addEventListener("click", () => {
+            mysteryVideo.src = MYSTERY_VIDEO_URL;
 
-        if (document.fullscreenElement) {
+            playPart1Button.hidden = true;
+            finishPart1Button.hidden = false;
+            playPart2Button.hidden = true;
 
-            document.exitFullscreen().catch(error => {
-                console.warn("No se pudo salir de pantalla completa:", error);
-            });
+            const videoScreenElement = document.getElementById("videoScreen");
 
-        }
+            if (videoScreenElement.requestFullscreen) {
+                videoScreenElement.requestFullscreen().catch(error => {
+                    console.warn("No se pudo activar pantalla completa:", error);
+                });
+            }
 
-        const mysteryVideo = document.getElementById("mysteryVideo");
+        });
+    }
 
-        if (mysteryVideo) {
-            mysteryVideo.src = "";
-        }
+    // CONFIRMAR QUE TERMINÓ LA PARTE 1
+    if (finishPart1Button) {
+        finishPart1Button.addEventListener("click", () => {
 
-        clearMysteryPassword();
+            finishPart1Button.hidden = true;
+            playPart2Button.hidden = false;
 
-        showScreen(audioScreen);
+        });
+    }
 
-    });
+    // REPRODUCIR PARTE 2
+    if (playPart2Button) {
+        playPart2Button.addEventListener("click", () => {
+
+            mysteryVideo.src = MYSTERY_VIDEO_URL_2;
+
+            playPart2Button.hidden = true;
+
+        });
+    }
+
+    // CERRAR VIDEOS Y VOLVER AL AUDIO-LIBRO
+    if (closeVideoButton) {
+        closeVideoButton.addEventListener("click", () => {
+
+            if (document.fullscreenElement) {
+                document.exitFullscreen().catch(error => {
+                    console.warn("No se pudo salir de pantalla completa:", error);
+                });
+            }
+
+            if (mysteryVideo) {
+                mysteryVideo.src = "";
+            }
+
+            clearMysteryPassword();
+
+            showScreen(audioScreen);
+
+        });
+    }
 
 });

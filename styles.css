@@ -1511,3 +1511,48 @@ body {
 .dropdown-menu.menu-open {
     display: flex;
 }
+
+
+/* BOTONES DE LAS PARTES DEL VIDEO */
+
+.video-controls {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    width: 90%;
+    z-index: 1002;
+}
+
+.video-part-button {
+    padding: 13px 28px;
+    min-width: 130px;
+    border: none;
+    border-radius: 10px;
+    background: #4c889b;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #004aad;
+}
+
+.video-part-button:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #004aad;
+}
+
+@media (max-width: 600px) {
+    .video-controls {
+        bottom: 18px;
+    }
+
+    .video-part-button {
+        padding: 12px 20px;
+        min-width: 115px;
+        font-size: 13px;
+    }
+}
